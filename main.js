@@ -1,18 +1,19 @@
 'use strict'
 
 var svg = d3.select("#svgview"),
-    margin = {top: 20, right: 40, bottom: 40, left: 80},
+    margin = {top: 20, right: 40, bottom: 40, left: 90},
     width = svg.attr("width") - margin.left - margin.right,
     height = svg.attr("height") - margin.top - margin.bottom;
 
-var x = d3.scaleLinear()
+// var x = d3.scaleLinear()
+var x = d3.scalePoint()
     .range([30,width])
 
 var globalData = {};
 
 //https://bl.ocks.org/mbostock/3371592
 var categories = ['DOS','Traffic Anomolay','Scan','Policy Breach','Brute Force' ]
-var axisXTime = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+var axisXTime = [0, 1, 2, 3, 4, 5, 6]
 var y = d3.scalePoint()
     .domain(categories)
     .range([height/9, 8*height/9])
@@ -64,7 +65,8 @@ function update(data) {
   let domainExtent = d3.extent(axisXTime);
 
   // Defines axis X domain
-  x.domain(domainExtent);
+  // x.domain(domainExtent);
+  x.domain(axisXTime);
 
   // Draw axis X line
   g.append("g")
