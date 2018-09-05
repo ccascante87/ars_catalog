@@ -11,7 +11,6 @@ var x = d3.scaleLinear()
 var globalData = {};
 
 //https://bl.ocks.org/mbostock/3371592
-// var categories = ['Starts Prize','Hybrid Art','Interactive Art','Net Vision','.net' ]
 var categories = ['DOS','Traffic Anomolay','Scan','Policy Breach','Brute Force' ]
 var axisXTime = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 var y = d3.scalePoint()
@@ -29,17 +28,10 @@ var circle
 
 var selected = null //0 displays all projects , 1 one project is selected
 
-//fix in case image is not avaliable
-d3.select('#artworkimage').on('error', d => {
-  d3.select('#artworkimage').attr('src','noimage.jpg')
-  return false
-})
-
 d3.json("graph.json",update)
 
 function update(data) {
   globalData = data;
-
 
   var options = {
         data: data,
@@ -64,34 +56,25 @@ function update(data) {
           }
       	},
         theme: "ars"
+  };
 
-};
+  $("#artsearch").easyAutocomplete(options);
 
-$("#artsearch").easyAutocomplete(options);
-
-  //calcula el minimo y el máximo es lo que hace d3.extent
-  //let domainExtent = d3.extent(data, function(d) { return d.time; })
+  //calculates min and max for axis X
   let domainExtent = d3.extent(axisXTime);
 
-  //define el domino de x
+  // Defines axis X domain
   x.domain(domainExtent);
 
-
-  //dibuja la linea inferior
+  // Draw axis X line
   g.append("g")
       .attr("class", "axis axis--x")
-      //lo pone al suelo
       .attr("transform", "translate(0," + height + ")")
-      //.attr("transform", "rotate(50deg)") //no va la rotacion
       .call(d3.axisBottom(x).tickFormat(d3.format('0')).ticks());
 
   g.append("g")
       .attr("class", "axis axis--x")
-      //lo pone al suelo
-     // .attr("transform", "translate(0," + height + ")")
-      //.attr("transform", "rotate(50deg)") //no va la rotacion
       .call(d3.axisLeft(y))
-
 
   data.forEach(function(d){
     d.x = width /2
@@ -100,10 +83,6 @@ $("#artsearch").easyAutocomplete(options);
   })
 
   var simulation = d3.forceSimulation(data)
-       //el x aplica la transformacion al año
-       //al final cada node es atraido al centro de cada año
-
-
 
   circle = g.selectAll("circle")
     .data(data)
@@ -113,8 +92,6 @@ $("#artsearch").easyAutocomplete(options);
       .attr("r", d => d.collide - 1)
       .attr("class", d => d.category.replace(' ','_').replace('.','').toLowerCase())
 
-
-  //en este punto cell contiene todas las celuclas
   function updateSim(){
 
     circle
@@ -135,11 +112,7 @@ $("#artsearch").easyAutocomplete(options);
 
   clearUI(false)
 
-
-
   circle.on('click',function(d,index){
-
-
       if( d3.event != null ){
         d3.event.stopPropagation()
       }
@@ -164,9 +137,6 @@ $("#artsearch").easyAutocomplete(options);
       selected = node
       clearUI();
 
-
-      // let ids = d.neighbor.map(x => x[0])
-
       circle.classed('disabled',true).classed('selected',false)
 
       let artworks = [{'sourceAddress':d.sourceAddress,'id':d.id}]
@@ -177,6 +147,11 @@ $("#artsearch").easyAutocomplete(options);
           let n = d3.select('#p'+node.id)
           let datum = n.datum()
           n.classed('disabled',false)
+          if(d.sourceAddress == node.sourceAddress) {
+            collide = 25
+          } else {
+            collide = 12
+          }
           datum.collide = collide
           n.transition().duration(200).attr('r',collide)
 
@@ -194,7 +169,6 @@ $("#artsearch").easyAutocomplete(options);
         .force("collide", d3.forceCollide(d => d.collide))
         .alpha(0.35 )
         .restart()
-
 
       //fill dataset
       let dataset = []
@@ -232,8 +206,6 @@ $("#artsearch").easyAutocomplete(options);
   })
 
   function clearUI(clearText = true){
-
-
     line.selectAll('text').remove()
 
     if(clearText){
@@ -260,7 +232,6 @@ $("#artsearch").easyAutocomplete(options);
     simulation
       .force("x", d3.forceX(d => x(d.time)).strength(.5))
       .force("y", d3.forceY(d => y(d.category)))
-      //dependiendo si ha ganado un golden nica tendrá 5 o 3 de radio
       .force("collide", d3.forceCollide(d => d.collide))
       .alpha(0.35 )
       .alphaDecay(0.01)
