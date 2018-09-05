@@ -3,48 +3,48 @@
     "category": "DOS",
     "suspicious": true,
     "title": "10.12.5.10",
-    "neighbours": [
+    "neighbor": [
       [
         2,
-        0.9353
+        0.9153
       ]
     ],
-    "year": 2,
+    "time": 2,
     "id": 1
   },
   {
     "category": "Brute Force",
     "suspicious": false,
     "title": "10.12.5.11",
-    "neighbours": [
+    "neighbor": [
       [
         4,
         0.9331
       ]
     ],
-    "year": 0,
+    "time": 0,
     "id": 2
   },
   {
     "category": "Scan",
     "suspicious": false,
     "title": "10.12.1.12",
-    "neighbours": [
+    "neighbor": [
     ],
-    "year": 8,
+    "time": 8,
     "id": 3
   },
   {
     "category": "DOS",
     "suspicious": true,
     "title": "10.12.7.15",
-    "neighbours": [
+    "neighbor": [
       [
         2,
         0.9013
       ]
     ],
-    "year": 12,
+    "time": 12,
     "id": 4
   }
 ]

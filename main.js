@@ -68,7 +68,7 @@ function update(data) {
 $("#artsearch").easyAutocomplete(options);
 
   //calcula el minimo y el máximo es lo que hace d3.extent
-  let domainExtent = d3.extent(data, function(d) { return d.year; })
+  let domainExtent = d3.extent(data, function(d) { return d.time; })
 
   //define el domino de x
   x.domain(domainExtent);
@@ -162,28 +162,28 @@ $("#artsearch").easyAutocomplete(options);
       clearUI();
 
 
-      let ids = d.neighbours.map(x => x[0])
+      let ids = d.neighbor.map(x => x[0])
 
       circle.classed('disabled',true).classed('selected',false)
 
       let global_threshold = 0.935
-      let minNeighbours = 2
-      let maxNeighbours = 5
+      let minNeighbor = 0
+      let maxNeighbor = 5
 
-      let distances = d.neighbours.map( d => d[1]).sort()
+      let distances = d.neighbor.map( d => d[1]).sort()
       let threshold = 0
 
-      for(let i = minNeighbours; i <= maxNeighbours && threshold <= global_threshold ; i ++ ){
+      for(let i = minNeighbor; i <= maxNeighbor && threshold <= global_threshold && i < distances.length ; i ++ ){
         threshold = distances[i]
       }
 
       let artworks = [{'title':d.title,'id':d.id}]
       let collide  = 10
-      for (let neighbour of d.neighbours){
+      for (let neighbor of d.neighbor){
 
-        let id       = neighbour[0]
-        let distance = neighbour[1]
-        if( distance < threshold){
+        let id       = neighbor[0]
+        let distance = neighbor[1]
+        if( distance <= threshold){
 
           let n = d3.select('#p'+id)
           let datum = n.datum()
@@ -210,10 +210,10 @@ $("#artsearch").easyAutocomplete(options);
 
       //fill dataset
       let dataset = []
-      for (let neighbour of d.neighbours){
+      for (let neighbor of d.neighbor){
 
-        let id       = neighbour[0]
-        let distance = neighbour[1]
+        let id       = neighbor[0]
+        let distance = neighbor[1]
 
         if( distance < threshold ) {
           let projData = d3.select('#p'+id).datum()
@@ -277,7 +277,7 @@ $("#artsearch").easyAutocomplete(options);
     circle.classed('disabled selected',false)
 
     simulation
-      .force("x", d3.forceX(d => x(d.year)).strength(.5))
+      .force("x", d3.forceX(d => x(d.time)).strength(.5))
       .force("y", d3.forceY(d => y(d.category)))
       //dependiendo si ha ganado un golden nica tendrá 5 o 3 de radio
       .force("collide", d3.forceCollide(d => d.collide))
@@ -302,7 +302,7 @@ $("#artsearch").easyAutocomplete(options);
     d3.select('#artworkimage').attr('src',imgurl)
 
     d3.select('#title').text(d.title)
-    // d3.select('#prizes').text(d.prize + ' ' +d.year)
+    // d3.select('#prizes').text(d.prize + ' ' +d.time)
 
   }
 
