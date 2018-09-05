@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "time": 9,
+    "sourceAddress": "10.12.25.185",
+    "suspicious": true,
+    "category": "DOS",
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
+  },
+  {
+    "id": 2,
+    "time": 7,
+    "sourceAddress": "10.12.25.185",
+    "suspicious": true,
+    "category": "DOS",
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
+  },
+  {
+    "id": 3,
+    "time": 8,
+    "sourceAddress": "10.12.20.165",
+    "suspicious": false,
+    "category": "DOS",
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
+  },
+  {
+    "id": 4,
+    "time": 2,
+    "sourceAddress": "10.13.5.10",
+    "suspicious": false,
+    "category": "Brute Force",
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
+  },
+  {
+    "id": 5,
+    "time": 10,
+    "sourceAddress": "10.13.7.15",
+    "suspicious": true,
+    "category": "Brute Force",
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
+  },
+  {
+    "id": 6,
+    "time": 5,
+    "sourceAddress": "10.12.20.165",
+    "suspicious": true,
+    "category": "Brute Force",
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
+  }
+]
