@@ -8,6 +8,7 @@ var svg = d3.select("#svgview"),
 var x = d3.scaleLinear()
     .range([30,width])
 
+var globalData = {};
 
 //https://bl.ocks.org/mbostock/3371592
 // var categories = ['Starts Prize','Hybrid Art','Interactive Art','Net Vision','.net' ]
@@ -37,7 +38,7 @@ d3.select('#artworkimage').on('error', d => {
 d3.json("graph.json",update)
 
 function update(data) {
-
+  globalData = data;
 
 
   var options = {
@@ -45,10 +46,10 @@ function update(data) {
         maxNumberOfElements: 8,
 
         getValue: function(d){
-                    if(d.title.length > 30 ){
-                      return d.title.substr(0,12)+'..'
+                    if(d.sourceAddress.length > 30 ){
+                      return d.sourceAddress.substr(0,12)+'..'
                     }else{
-                      return d.title
+                      return d.sourceAddress
                     }
                   },
 
@@ -145,7 +146,7 @@ $("#artsearch").easyAutocomplete(options);
       //
 
       //display location hash
-      location.hash = d.id + '_' + encodeURIComponent(d.title.substr(0,10))
+      location.hash = d.id + '_' + encodeURIComponent(d.sourceAddress.substr(0,10))
 
       let node = d3.select(this)
 
@@ -164,30 +165,16 @@ $("#artsearch").easyAutocomplete(options);
       clearUI();
 
 
-      let ids = d.neighbor.map(x => x[0])
+      // let ids = d.neighbor.map(x => x[0])
 
       circle.classed('disabled',true).classed('selected',false)
 
-      let global_threshold = 0.935
-      let minNeighbor = 0
-      let maxNeighbor = 5
-
-      let distances = d.neighbor.map( d => d[1]).sort()
-      let threshold = 0
-
-      for(let i = minNeighbor; i <= maxNeighbor && threshold <= global_threshold && i < distances.length ; i ++ ){
-        threshold = distances[i]
-      }
-
-      let artworks = [{'title':d.title,'id':d.id}]
+      let artworks = [{'sourceAddress':d.sourceAddress,'id':d.id}]
       let collide  = 10
-      for (let neighbor of d.neighbor){
 
-        let id       = neighbor[0]
-        let distance = neighbor[1]
-        if( distance <= threshold){
-
-          let n = d3.select('#p'+id)
+      for(let node of globalData) {
+        if(d.sourceAddress == node.sourceAddress || getSubnet(d.sourceAddress) == getSubnet(node.sourceAddress)) {
+          let n = d3.select('#p'+node.id)
           let datum = n.datum()
           n.classed('disabled',false)
           datum.collide = collide
@@ -195,8 +182,7 @@ $("#artsearch").easyAutocomplete(options);
 
           collide = Math.max(5,collide*0.75)
 
-          artworks.push({ 'title':datum.title,'id':datum.id})
-
+          artworks.push({ 'sourceAddress':datum.sourceAddress,'id':datum.id})
         }
       }
 
@@ -212,16 +198,11 @@ $("#artsearch").easyAutocomplete(options);
 
       //fill dataset
       let dataset = []
-      for (let neighbor of d.neighbor){
-
-        let id       = neighbor[0]
-        let distance = neighbor[1]
-
-        if( distance < threshold ) {
-          let projData = d3.select('#p'+id).datum()
-          dataset.push({'source':d,'target':projData,'distance':distance})
+      for(let node of globalData) {
+        if(d.tittle == node.sourceAddress || getSubnet(d.sourceAddress) == getSubnet(node.sourceAddress)) {
+          let projData = d3.select('#p'+node.id).datum()
+          dataset.push({'source':d,'target':projData})
         }
-
       }
 
       d3.select('#p'+d.id).classed('disabled',false).classed('selected',true)
@@ -237,16 +218,15 @@ $("#artsearch").easyAutocomplete(options);
           .attr('y', d => d.y + 12)
           .attr('class','tooltip')
           .html( function(d){
-                    if(d.title.length > 15 ){
-                      return d.title.substr(0,12)+'..'
+                    if(d.sourceAddress.length > 15 ){
+                      return d.sourceAddress.substr(0,12)+'..'
                     }else{
-                      return d.title
+                      return d.sourceAddress
                     }})
 
 
       // update UI
-
-      d3.select('#closest').html(artworks.map(d => `${d.title}`).join(' - '))
+      d3.select('#closest').html(artworks.map(d => `${d.sourceAddress}`).join(' - '))
       // updateInfo(d)
 
   })
@@ -261,7 +241,6 @@ $("#artsearch").easyAutocomplete(options);
       d3.select('#title').text('')
       d3.select('#prizes').text('')
       d3.select('#catalog_text').text('')
-      d3.select('#artworkimage').attr('src','noimage.jpg')
     }
     data.forEach(d =>
       d.collide = (d.suspicious) ? 7:4)
@@ -288,6 +267,15 @@ $("#artsearch").easyAutocomplete(options);
 
   }
 
+  function getSubnet(address) {
+    let parts = address.split('.');
+    let octect = "o0.o1.x.x";
+    for(var i = 0; i < 2; i++) {
+      octect = octect.replace("o" + i, parts[i]);
+    }
+    return octect;
+  }
+
   function updateInfo(d){
 
     // update UI
@@ -303,7 +291,7 @@ $("#artsearch").easyAutocomplete(options);
     let imgurl = `images/${(''+d.id).padStart(6,'0')}.jpg`;
     d3.select('#artworkimage').attr('src',imgurl)
 
-    d3.select('#title').text(d.title)
+    d3.select('#title').text(d.sourceAddress)
     // d3.select('#prizes').text(d.prize + ' ' +d.time)
 
   }
@@ -318,7 +306,7 @@ $("#artsearch").easyAutocomplete(options);
   svg.on('click',(d,index) =>
     {
       //https://stackoverflow.com/a/28155967
-      history.replaceState({}, document.title, ".");
+      history.replaceState({}, document.sourceAddress, ".");
       d3.event.stopPropagation()
       clearUI()
       selected = null
@@ -330,7 +318,7 @@ $("#artsearch").easyAutocomplete(options);
        tooltip.transition()
          .duration(200)
          .style("opacity", .9);
-       tooltip.html(d.title)
+       tooltip.html(d.sourceAddress)
          .attr('x',d.x)
          .attr('y',0)
        })

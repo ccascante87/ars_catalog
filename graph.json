@@ -2,155 +2,49 @@
   {
     "id": 1,
     "time": 9,
-    "title": "10.12.25.185",
+    "sourceAddress": "10.12.25.185",
     "suspicious": true,
     "category": "DOS",
-    "neighbor": [
-      [
-        1,
-        0.2108
-      ],
-      [
-        2,
-        0.4808
-      ],
-      [
-        3,
-        0.6808
-      ],
-      [
-        4,
-        0.5808
-      ]
-    ]
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
   },
   {
     "id": 2,
     "time": 7,
-    "title": "10.12.40.160",
+    "sourceAddress": "10.12.25.185",
     "suspicious": true,
     "category": "DOS",
-    "neighbor": [
-      [
-        3,
-        0.2656
-      ],
-      [
-        4,
-        0.3656
-      ],
-      [
-        5,
-        0.1756
-      ],
-      [
-        6,
-        0.2356
-      ]
-    ]
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
   },
   {
     "id": 3,
     "time": 8,
-    "title": "10.12.20.165",
+    "sourceAddress": "10.12.20.165",
     "suspicious": false,
     "category": "DOS",
-    "neighbor": [
-      [
-        1,
-        0.2575
-      ],
-      [
-        2,
-        0.3575
-      ],
-      [
-        3,
-        0.4475
-      ],
-      [
-        4,
-        0.2475
-      ],
-      [
-        5,
-        0.6475
-      ],
-      [
-        6,
-        0.1855
-      ]
-    ]
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
   },
   {
     "id": 4,
     "time": 2,
-    "title": "10.12.5.10",
+    "sourceAddress": "10.13.5.10",
     "suspicious": false,
     "category": "Brute Force",
-    "neighbor": [
-      [
-        1,
-        0.7329
-      ],
-      [
-        4,
-        0.2329
-      ],
-      [
-        5,
-        0.3329
-      ]
-    ]
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
   },
   {
     "id": 5,
     "time": 10,
-    "title": "10.12.7.15",
+    "sourceAddress": "10.13.7.15",
     "suspicious": true,
     "category": "Brute Force",
-    "neighbor": [
-      [
-        6,
-        0.5474
-      ],
-      [
-        2,
-        0.7474
-      ]
-    ]
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
   },
   {
     "id": 6,
     "time": 5,
-    "title": "10.12.20.165",
+    "sourceAddress": "10.12.20.165",
     "suspicious": true,
     "category": "Brute Force",
-    "neighbor": [
-      [
-        1,
-        0.2322
-      ],
-      [
-        2,
-        0.1322
-      ],
-      [
-        3,
-        0.3322
-      ],
-      [
-        4,
-        0.7322
-      ],
-      [
-        5,
-        0.2322
-      ],
-      [
-        6,
-        0.1322
-      ]
-    ]
+    "targetAddress": [ ["10.2.12.25",2], ["x.x.x.y",10] ]
   }
 ]
