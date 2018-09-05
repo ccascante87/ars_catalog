@@ -12,6 +12,7 @@ var x = d3.scaleLinear()
 //https://bl.ocks.org/mbostock/3371592
 // var categories = ['Starts Prize','Hybrid Art','Interactive Art','Net Vision','.net' ]
 var categories = ['DOS','Traffic Anomolay','Scan','Policy Breach','Brute Force' ]
+var axisXTime = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 var y = d3.scalePoint()
     .domain(categories)
     .range([height/9, 8*height/9])
@@ -68,7 +69,8 @@ function update(data) {
 $("#artsearch").easyAutocomplete(options);
 
   //calcula el minimo y el máximo es lo que hace d3.extent
-  let domainExtent = d3.extent(data, function(d) { return d.time; })
+  //let domainExtent = d3.extent(data, function(d) { return d.time; })
+  let domainExtent = d3.extent(axisXTime);
 
   //define el domino de x
   x.domain(domainExtent);
@@ -151,7 +153,7 @@ $("#artsearch").easyAutocomplete(options);
 
         circle.classed('selected',false)
         node.classed('selected',true)
-        updateInfo(d)
+        // updateInfo(d)
         selected = node
 
         return;
@@ -245,7 +247,7 @@ $("#artsearch").easyAutocomplete(options);
       // update UI
 
       d3.select('#closest').html(artworks.map(d => `${d.title}`).join(' - '))
-      updateInfo(d)
+      // updateInfo(d)
 
   })
 

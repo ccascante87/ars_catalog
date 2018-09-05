@@ -1,50 +1,156 @@
 [
   {
-    "category": "DOS",
+    "id": 1,
+    "time": 9,
+    "title": "10.12.25.185",
     "suspicious": true,
-    "title": "10.12.5.10",
+    "category": "DOS",
     "neighbor": [
       [
+        1,
+        0.2108
+      ],
+      [
         2,
-        0.9153
-      ]
-    ],
-    "time": 2,
-    "id": 1
-  },
-  {
-    "category": "Brute Force",
-    "suspicious": false,
-    "title": "10.12.5.11",
-    "neighbor": [
+        0.4808
+      ],
+      [
+        3,
+        0.6808
+      ],
       [
         4,
-        0.9331
+        0.5808
       ]
-    ],
-    "time": 0,
-    "id": 2
+    ]
   },
   {
-    "category": "Scan",
-    "suspicious": false,
-    "title": "10.12.1.12",
-    "neighbor": [
-    ],
-    "time": 8,
-    "id": 3
-  },
-  {
-    "category": "DOS",
+    "id": 2,
+    "time": 7,
+    "title": "10.12.40.160",
     "suspicious": true,
-    "title": "10.12.7.15",
+    "category": "DOS",
     "neighbor": [
       [
-        2,
-        0.9013
+        3,
+        0.2656
+      ],
+      [
+        4,
+        0.3656
+      ],
+      [
+        5,
+        0.1756
+      ],
+      [
+        6,
+        0.2356
       ]
-    ],
-    "time": 12,
-    "id": 4
+    ]
+  },
+  {
+    "id": 3,
+    "time": 8,
+    "title": "10.12.20.165",
+    "suspicious": false,
+    "category": "DOS",
+    "neighbor": [
+      [
+        1,
+        0.2575
+      ],
+      [
+        2,
+        0.3575
+      ],
+      [
+        3,
+        0.4475
+      ],
+      [
+        4,
+        0.2475
+      ],
+      [
+        5,
+        0.6475
+      ],
+      [
+        6,
+        0.1855
+      ]
+    ]
+  },
+  {
+    "id": 4,
+    "time": 2,
+    "title": "10.12.5.10",
+    "suspicious": false,
+    "category": "Brute Force",
+    "neighbor": [
+      [
+        1,
+        0.7329
+      ],
+      [
+        4,
+        0.2329
+      ],
+      [
+        5,
+        0.3329
+      ]
+    ]
+  },
+  {
+    "id": 5,
+    "time": 10,
+    "title": "10.12.7.15",
+    "suspicious": true,
+    "category": "Brute Force",
+    "neighbor": [
+      [
+        6,
+        0.5474
+      ],
+      [
+        2,
+        0.7474
+      ]
+    ]
+  },
+  {
+    "id": 6,
+    "time": 5,
+    "title": "10.12.20.165",
+    "suspicious": true,
+    "category": "Brute Force",
+    "neighbor": [
+      [
+        1,
+        0.2322
+      ],
+      [
+        2,
+        0.1322
+      ],
+      [
+        3,
+        0.3322
+      ],
+      [
+        4,
+        0.7322
+      ],
+      [
+        5,
+        0.2322
+      ],
+      [
+        6,
+        0.1322
+      ]
+    ]
   }
 ]
