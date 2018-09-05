@@ -10,7 +10,8 @@ var x = d3.scaleLinear()
 
 
 //https://bl.ocks.org/mbostock/3371592
-var categories = ['Starts Prize','Hybrid Art','Interactive Art','Net Vision','.net' ]
+// var categories = ['Starts Prize','Hybrid Art','Interactive Art','Net Vision','.net' ]
+var categories = ['DOS','Traffic Anomolay','Scan','Policy Breach','Brute Force' ]
 var y = d3.scalePoint()
     .domain(categories)
     .range([height/9, 8*height/9])
@@ -79,7 +80,7 @@ $("#artsearch").easyAutocomplete(options);
       //lo pone al suelo
       .attr("transform", "translate(0," + height + ")")
       //.attr("transform", "rotate(50deg)") //no va la rotacion
-      .call(d3.axisBottom(x).tickFormat(d3.format('04')).ticks());
+      .call(d3.axisBottom(x).tickFormat(d3.format('0')).ticks());
 
   g.append("g")
       .attr("class", "axis axis--x")
@@ -92,7 +93,7 @@ $("#artsearch").easyAutocomplete(options);
   data.forEach(function(d){
     d.x = width /2
     d.y = height/2;
-    d.collide = (d.prize == 'Golden Nica') ? 10:6
+    d.collide = (d.suspicious) ? 10:6
   })
 
   var simulation = d3.forceSimulation(data)
@@ -261,7 +262,7 @@ $("#artsearch").easyAutocomplete(options);
       d3.select('#artworkimage').attr('src','noimage.jpg')
     }
     data.forEach(d =>
-      d.collide = (d.prize == 'Golden Nica') ? 7:4)
+      d.collide = (d.suspicious) ? 7:4)
 
     g.selectAll('circle:not(.disabled)').attr('r',d => d.collide - 1 )
 
@@ -301,7 +302,7 @@ $("#artsearch").easyAutocomplete(options);
     d3.select('#artworkimage').attr('src',imgurl)
 
     d3.select('#title').text(d.title)
-    d3.select('#prizes').text(d.prize + ' ' +d.year)
+    // d3.select('#prizes').text(d.prize + ' ' +d.year)
 
   }
 

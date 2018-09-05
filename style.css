@@ -21,7 +21,7 @@ div.social a:hover{
   color:#CCC;
 }
 
-div.social a{  
+div.social a{
   color:#AAA;
 }
 
@@ -175,19 +175,19 @@ text{
 
 }
 
-.net{
+.dos{
   fill: #DA2C38;
 }
-.interactive_art{
+.traffic_anomaly{
   fill: #FF6F3C;
 }
-.hybrid_art{
+.scan{
   fill: #FF9A3C;
 }
-.net_vision{
+.policy_breach{
   fill:#E8295B;
 }
-.starts_prize{
+.brute_force{
   fill:#FFCC00;
 }
 .disabled{
