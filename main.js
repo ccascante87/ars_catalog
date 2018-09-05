@@ -211,8 +211,6 @@ function update(data) {
     if(clearText){
       d3.select('#closest').text('')
       d3.select('#title').text('')
-      d3.select('#prizes').text('')
-      d3.select('#catalog_text').text('')
     }
     data.forEach(d =>
       d.collide = (d.suspicious) ? 7:4)
@@ -263,8 +261,6 @@ function update(data) {
     d3.select('#artworkimage').attr('src',imgurl)
 
     d3.select('#title').text(d.sourceAddress)
-    // d3.select('#prizes').text(d.prize + ' ' +d.time)
-
   }
 
   if( location.hash.length != '' ){
