@@ -306,7 +306,7 @@ function update(data) {
     	  divMaster.style("top"    , d3.event.pageY-25+"px");
   		  divMaster.style("display", "inline-block");	  
 
-    	  divMaster.html((d.data.type)+"<br>"+(d.data.freq));  
+    	  divMaster.html((d.data.type));  
     	  $('#toolTip').show();
       }
 
