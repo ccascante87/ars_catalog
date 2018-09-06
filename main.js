@@ -12,6 +12,9 @@ var fData=[]
 var colorsTargetAddress =[]
 
 // var x = d3.scaleLinear()
+
+var xscale = d3.scale.linear()
+
 var x = d3.scalePoint()
     .range([30,width])
 
@@ -298,13 +301,12 @@ function update(data) {
       // Utility function to be called on mouseover a pie slice.
       function mouseover(d){
     	  
-//    	  var coordinates = d3.mouse(this);
-//    	  var x = x.invert(coordinates[0] - 50);
-//    	  var y = x.invert(coordinates[1] - 50);     	  
     	  
-    	  //alert(x + "¡" + y);
+    	  divMaster.style("left"   , d3.event.pageX+10+"px");
+    	  divMaster.style("top"    , d3.event.pageY-25+"px");
+  		  divMaster.style("display", "inline-block");	  
+
     	  divMaster.html((d.data.type)+"<br>"+(d.data.freq));  
-//    	  $('#toolTip').css({'top':x,'left':y});
     	  $('#toolTip').show();
       }
 
