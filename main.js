@@ -387,7 +387,7 @@ function update(data) {
 		      }
 		      fData.push(this[e.type])
 		    } else {
-		      this[e.type]['freq'] = this[e.type]['freq'] + e.freq
+		      this[e.type]['freq'] += e.freq
 		    }
 	    }, {})
 
