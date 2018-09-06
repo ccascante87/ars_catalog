@@ -219,6 +219,7 @@ function update(data) {
     if(clearText){
       d3.select('#closest').text('')
       d3.select('#title').text('')
+      d3.select('#titletop').text('')
       d3.select(pieChartIDName).html('')
       d3.select(legendIDName).html('')
     }
@@ -269,6 +270,9 @@ function update(data) {
       var pC ={},    pieDim ={w:250, h: 250};
       pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
 
+      var divMaster = d3.select("body").append("div").attr("class", "toolTip")
+      												 .attr("id", "toolTip");      
+      
       // create svg for pie chart.
       var piesvg = d3.select(id).append("svg")
           .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
@@ -293,10 +297,21 @@ function update(data) {
       }
       // Utility function to be called on mouseover a pie slice.
       function mouseover(d){
-
+    	  
+//    	  var coordinates = d3.mouse(this);
+//    	  var x = x.invert(coordinates[0] - 50);
+//    	  var y = x.invert(coordinates[1] - 50);     	  
+    	  
+    	  //alert(x + "¡" + y);
+    	  divMaster.html((d.data.type)+"<br>"+(d.data.freq));  
+//    	  $('#toolTip').css({'top':x,'left':y});
+    	  $('#toolTip').show();
       }
+
       //Utility function to be called on mouseout a pie slice.
       function mouseout(d){
+    	  divMaster.html('');
+    	  $('#toolTip').hide();
       }
       // Animating the pie-slice requiring a custom function which specifies
       // how the intermediate paths should be drawn.
@@ -331,8 +346,8 @@ function update(data) {
           .text(function(d){ return d3.format(",")(d.freq);});
 
       // create the fourth column for each segment.
-      tr.append("td").attr("class",'legendPerc')
-          .text(function(d){ return getLegend(d,lD);});
+//      tr.append("td").attr("class",'legendPerc')
+//          .text(function(d){ return getLegend(d,lD);});
 
       // Utility function to be used to update the legend.
       leg.update = function(nD){
@@ -396,6 +411,7 @@ function update(data) {
 		var leg    = legend(legendIDName,fData);    // create the legend.
 
 		d3.select('#title').text("Source Address: " + d.sourceAddress)
+		d3.select('#titletop').text("Top target addresses")		
   }
 
   if( location.hash.length != '' ){

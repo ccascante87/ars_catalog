@@ -109,8 +109,19 @@ div.search{
   font-family: "Lato";
 }
 
+#title{
+  font-weight:300;
+  color:#E5E5E5;
+  font-size: 1.8em;
+  margin-bottom: 40px;
+  font-family: "Lato";
+}
+#titletop{
+	margin: 7%;	
+}
+
 .art-title span{
-	margin: 20%;
+	/*margin: 20%;*/
 }
 
 #prizes{
@@ -261,10 +272,11 @@ svg{
     border: 3px solid transparent;
     padding: 10px;
     height: 100%;
+    font-size:      10px;
 }
 
 .legend td{
-	padding:10px;
+/* 	padding:10px; */
 }
 
 #div_legend{
@@ -275,4 +287,19 @@ svg{
 
 #div_infobox{
  	margin-top:20px;
+}
+
+.toolTip {
+    position: absolute;
+/*     display: none; */
+    width: auto;
+    height: auto;
+    background: none repeat scroll 0 0 white;
+    border: 0 none;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: -3px 3px 15px #888888;
+    color: black;
+    font: 12px sans-serif;
+    padding: 5px;
+    text-align: center;
 }
