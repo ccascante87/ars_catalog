@@ -250,7 +250,7 @@ function update(data) {
 	  var color = '#' + (Math.random().toString(16) + "000000").substring(2,8);
 	  var id = c;
 	  var found = colorsTargetAddress.some(function (el) {
-		console.log(el.color + "+" + c);
+		//console.log(el.color + "+" + c);
 		if( el.id === id)
 			color = el.color;
 	  });
@@ -365,10 +365,28 @@ function update(data) {
   function updateInfo(d){
 
 	    // calculate the targetAddress
-	    fData = d.targetAddress.map(function(d){ 
+	    var fData1 = d.targetAddress.map(function(d){ 
 	        return {type:d[0], freq:d[1]}; 
-	    });  	  
+	    });
+	    
+//	    fData = d3.nest()
+//	    .key(function(d) { return d.type; })
+//	    .rollup(function(v) { return d3.sum(v, function(d) { return d.freq; }); })
+//	    .object(d.targetAddress);	    
 	  
+	    fData = []
+	    fData1.forEach(function(e, i) {
+		    if (!this[e.type]) {
+		      this[e.type] = {
+		    		  type: e.type,
+		        ['freq']: e.freq
+		      }
+		      fData.push(this[e.type])
+		    } else {
+		      this[e.type]['freq'] = e.freq
+		    }
+	    }, {})	  
+	    
 	   // update UI
 		var pCData = pieChart(pieChartIDName,fData) // create the pie-chart.
 		var leg    = legend(legendIDName,fData);    // create the legend.
