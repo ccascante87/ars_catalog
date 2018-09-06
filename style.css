@@ -251,6 +251,7 @@ svg{
     width: 60%;
     border: 3px solid transparent;
     padding: 10px;
+    height: 440px;
 }
 
 .legend td{

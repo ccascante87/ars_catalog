@@ -18,7 +18,7 @@ var x = d3.scalePoint()
 var globalData = {};
 
 //https://bl.ocks.org/mbostock/3371592
-var categories = ['DOS','Traffic Anomolay','Scan','Policy Breach','Brute Force' ]
+var categories = ['DOS','Traffic Anomaly','Scan','Policy Breach','Brute Force' ]
 var axisXTime = [0, 1, 2, 3, 4, 5, 6]
 var y = d3.scalePoint()
     .domain(categories)
