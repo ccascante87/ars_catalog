@@ -274,8 +274,8 @@ function update(data) {
       pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
 
       var divMaster = d3.select("body").append("div").attr("class", "toolTip")
-      												 .attr("id", "toolTip");      
-      
+      												 .attr("id", "toolTip");
+
       // create svg for pie chart.
       var piesvg = d3.select(id).append("svg")
           .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
@@ -300,13 +300,13 @@ function update(data) {
       }
       // Utility function to be called on mouseover a pie slice.
       function mouseover(d){
-    	  
-    	  
+
+
     	  divMaster.style("left"   , d3.event.pageX+10+"px");
     	  divMaster.style("top"    , d3.event.pageY-25+"px");
-  		  divMaster.style("display", "inline-block");	  
+  		  divMaster.style("display", "inline-block");
 
-    	  divMaster.html((d.data.type));  
+    	  divMaster.html((d.data.type));
     	  $('#toolTip').show();
       }
 
@@ -371,7 +371,7 @@ function update(data) {
   }
 
   function compareSubnet(address1, address2) {
-    return address1 == address2;
+    return getSubnet(address1) == getSubnet(address2);
   }
 
   function getSubnet(address) {
@@ -413,7 +413,7 @@ function update(data) {
 		var leg    = legend(legendIDName,fData);    // create the legend.
 
 		d3.select('#title').text("Source Address: " + d.sourceAddress)
-		d3.select('#titletop').text("Top target addresses")		
+		d3.select('#titletop').text("Top target addresses")
   }
 
   if( location.hash.length != '' ){
