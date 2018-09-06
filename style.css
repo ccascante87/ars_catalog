@@ -89,11 +89,10 @@ div.search{
   font-family: "Lato"
 }
 .navigator h3 {
-  color: #EEE;
-  font-weight: 200;
   margin-top: -15px;;
   width: 300px;
   font-family: "Lato"
+  font-weight:400;
 }
 .subtitle{
   margin-left: 2em;
@@ -102,22 +101,17 @@ div.search{
   margin-bottom: 12px;
 }
 #title{
-  font-weight:300;
-  color:#E5E5E5;
-  font-size: 1.8em;
-  margin-bottom: 40px;
-  font-family: "Lato";
-}
-
-#title{
-  font-weight:300;
+  font-weight:400;
   color:#E5E5E5;
   font-size: 1.8em;
   margin-bottom: 40px;
   font-family: "Lato";
 }
 #titletop{
-	margin: 7%;	
+	margin: 48px;
+  font-size: 15px;
+  font-family: "Lato";
+  font-weight:400;
 }
 
 .art-title span{
@@ -275,14 +269,24 @@ svg{
     font-size:      10px;
 }
 
+.legend {
+  font-family: "Lato";
+  font-weight:400;
+}
+
 .legend td{
-/* 	padding:10px; */
+	padding-left:5px;
+}
+
+.legend td.legendFreq {
+  padding-left: 40px;
 }
 
 #div_legend{
 	position:relative;
-	margin-left: 270px;
+	margin-left: 295px;
 	top:-250px;
+  font-size: 14px;
 }
 
 #div_infobox{
