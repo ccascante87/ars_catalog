@@ -6,7 +6,7 @@ body{
 }
 
 div.navigator{
-  margin: 30px 0px;
+  margin: 0px 0px;
 }
 
 div.social{
@@ -28,6 +28,8 @@ div.social a{
 div.search{
   float:right;
   width:215px;
+  margin-top: -40px;
+  margin-right: 28px;
 }
 /*EASYAUTOCOMPLETE*/
 
@@ -78,12 +80,19 @@ div.search{
   color: #888;
 }
 
-.navigator h1{
+.navigator h1, {
   color: #EEE;
   font-weight: 200;
-  margin: 0em 0em 0em 1em;
+  margin: 0em 0em 0em 0em;
   width: 300px;
   display:inline-block;
+  font-family: "Lato"
+}
+.navigator h3 {
+  color: #EEE;
+  font-weight: 200;
+  margin-top: -15px;;
+  width: 300px;
   font-family: "Lato"
 }
 .subtitle{
@@ -201,7 +210,7 @@ text{
 }
 
 .axis text {
-  font: 10px sans-serif;
+  font: 12px sans-serif;
 }
 /*celulas de voronoi*/
 .cells path {
@@ -251,7 +260,7 @@ svg{
     width: 60%;
     border: 3px solid transparent;
     padding: 10px;
-    height: 440px;
+    height: 100%;
 }
 
 .legend td{
