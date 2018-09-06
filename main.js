@@ -9,7 +9,7 @@ var pieChartIDName  = "#div_infobox";
 var legendIDName    = "#div_legend";
 
 var fData=[]
-var colorsTargetAddress =[] 
+var colorsTargetAddress =[]
 
 // var x = d3.scaleLinear()
 var x = d3.scalePoint()
@@ -151,7 +151,7 @@ function update(data) {
       let collide  = 10
 
       for(let node of globalData) {
-        if(d.sourceAddress == node.sourceAddress || getSubnet(d.sourceAddress) == getSubnet(node.sourceAddress)) {
+        if(d.sourceAddress == node.sourceAddress || compareSubnet(d.sourceAddress, node.sourceAddress)) {
           let n = d3.select('#p'+node.id)
           let datum = n.datum()
           n.classed('disabled',false)
@@ -181,7 +181,7 @@ function update(data) {
       //fill dataset
       let dataset = []
       for(let node of globalData) {
-        if(d.tittle == node.sourceAddress || getSubnet(d.sourceAddress) == getSubnet(node.sourceAddress)) {
+        if(d.sourceAddress == node.sourceAddress || compareSubnet(d.sourceAddress, node.sourceAddress)) {
           let projData = d3.select('#p'+node.id).datum()
           dataset.push({'source':d,'target':projData})
         }
@@ -219,8 +219,8 @@ function update(data) {
     if(clearText){
       d3.select('#closest').text('')
       d3.select('#title').text('')
-      d3.select(pieChartIDName).html('')  
-      d3.select(legendIDName).html('')      
+      d3.select(pieChartIDName).html('')
+      d3.select(legendIDName).html('')
     }
     data.forEach(d =>
       d.collide = (d.suspicious) ? 7:4)
@@ -245,8 +245,8 @@ function update(data) {
       .alphaDecay(0.01)
 
   }
-  
-  function segColor(c){ 
+
+  function segColor(c){
 	  var color = '#' + (Math.random().toString(16) + "000000").substring(2,8);
 	  var id = c;
 	  var found = colorsTargetAddress.some(function (el) {
@@ -254,29 +254,29 @@ function update(data) {
 		if( el.id === id)
 			color = el.color;
 	  });
-	  if (!found) { colorsTargetAddress.push({ id: id, color: color }); }	  
-	  
-	  return color;	  
-  }    
-  
-  
+	  if (!found) { colorsTargetAddress.push({ id: id, color: color }); }
+
+	  return color;
+  }
+
+
   // function to handle pieChart.
   function pieChart(id,pD){
 
-	  d3.select(pieChartIDName).html('')	  
+	  d3.select(pieChartIDName).html('')
 	  d3.select(legendIDName).html('')
-	  
+
       var pC ={},    pieDim ={w:250, h: 250};
       pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
-      
+
       // create svg for pie chart.
       var piesvg = d3.select(id).append("svg")
           .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
           .attr("transform", "translate("+pieDim.w/2+","+pieDim.h/2+")");
-         
+
       // create function to draw the arcs of the pie slices.
       var arc = d3.svg.arc().outerRadius(pieDim.r - 10).innerRadius(pieDim.r - 40);
-      
+
       // create a function to compute the pie slice angles.
       var pie = d3.layout.pie().sort(null).value(function(d) { return d.freq; });
 
@@ -290,7 +290,7 @@ function update(data) {
       pC.update = function(nD){
           piesvg.selectAll("path").data(pie(nD)).transition().duration(500)
               .attrTween("d", arcTween);
-      }        
+      }
       // Utility function to be called on mouseover a pie slice.
       function mouseover(d){
 
@@ -304,25 +304,25 @@ function update(data) {
           var i = d3.interpolate(this._current, a);
           this._current = i(0);
           return function(t) { return arc(i(t));    };
-      }    
+      }
       return pC;
   }
-  
+
   // function to handle legend.
   function legend(id,lD){
       var leg = {};
-          
+
       // create table for legend.
       var legend = d3.select(id).append("table").attr('class','legend');
-      
+
       // create one row per segment.
       var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
-          
+
       // create the first column for each segment.
       tr.append("td").append("svg").attr("width", '16').attr("height", '16').append("rect")
           .attr("width", '16').attr("height", '16')
 			.attr("fill",function(d){ return segColor(d.type); });
-          
+
       // create the second column for each segment.
       tr.append("td").text(function(d){ return d.type;});
 
@@ -343,15 +343,19 @@ function update(data) {
           l.select(".legendFreq").text(function(d){ return d3.format(",")(d.freq);});
 
           // update the percentage column.
-          l.select(".legendPerc").text(function(d){ return getLegend(d,nD);});        
+          l.select(".legendPerc").text(function(d){ return getLegend(d,nD);});
       }
-      
+
       function getLegend(d,aD){ // Utility function to compute percentage.
           return d3.format("%")(d.freq/d3.sum(aD.map(function(v){ return v.freq; })));
       }
 
       return leg;
-  }    
+  }
+
+  function compareSubnet(address1, address2) {
+    return address1 == address2;
+  }
 
   function getSubnet(address) {
     let parts = address.split('.');
@@ -365,15 +369,15 @@ function update(data) {
   function updateInfo(d){
 
 	    // calculate the targetAddress
-	    var fData1 = d.targetAddress.map(function(d){ 
-	        return {type:d[0], freq:d[1]}; 
+	    var fData1 = d.targetAddress.map(function(d){
+	        return {type:d[0], freq:d[1]};
 	    });
-	    
+
 //	    fData = d3.nest()
 //	    .key(function(d) { return d.type; })
 //	    .rollup(function(v) { return d3.sum(v, function(d) { return d.freq; }); })
-//	    .object(d.targetAddress);	    
-	  
+//	    .object(d.targetAddress);
+
 	    fData = []
 	    fData1.forEach(function(e, i) {
 		    if (!this[e.type]) {
@@ -385,8 +389,8 @@ function update(data) {
 		    } else {
 		      this[e.type]['freq'] = e.freq
 		    }
-	    }, {})	  
-	    
+	    }, {})
+
 	   // update UI
 		var pCData = pieChart(pieChartIDName,fData) // create the pie-chart.
 		var leg    = legend(legendIDName,fData);    // create the legend.
