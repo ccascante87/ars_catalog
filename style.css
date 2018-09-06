@@ -99,6 +99,11 @@ div.search{
   margin-bottom: 40px;
   font-family: "Lato";
 }
+
+.art-title span{
+	margin: 20%;
+}
+
 #prizes{
   font-family: "Lato";
   font-weight:100;
@@ -225,8 +230,6 @@ svg{
   margin: 0px 20px;
 }
 
-
-
 .tooltip {
 
   text-align: center;
@@ -241,4 +244,25 @@ svg{
 }
 #artworkimage{
   heigh:200px;
+}
+
+.center {
+    margin: auto;
+    width: 60%;
+    border: 3px solid transparent;
+    padding: 10px;
+}
+
+.legend td{
+	padding:10px;
+}
+
+#div_legend{
+	position:relative;
+	margin-left: 270px;
+	top:-250px;
+}
+
+#div_infobox{
+ 	margin-top:20px;
 }
