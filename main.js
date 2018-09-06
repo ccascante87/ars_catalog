@@ -219,6 +219,8 @@ function update(data) {
     if(clearText){
       d3.select('#closest').text('')
       d3.select('#title').text('')
+      d3.select(pieChartIDName).html('')  
+      d3.select(legendIDName).html('')      
     }
     data.forEach(d =>
       d.collide = (d.suspicious) ? 7:4)
